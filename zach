@@ -211,3 +211,49 @@ sorted(numlist, reverse=True)
     for i in nums:
         num_lines += 1 
     
+
+  
+  
+  
+  
+  ### Prac exam:
+  ###q1.string of floats comma seperated retrun each float an elemnet in list new list
+  def q1(floatstr):  <--- string of floats comma seperated retrun each float an elemnet in list new list
+    newlist = []
+    list = []
+    list = floatstr.split(',')
+    for i in list:
+        a = float(i)
+        newlist.append(a)
+      
+     return[float(x) for x in foatstr.split(',')]
+     
+     return list(map(float,floatstr.split(','))
+
+   ###q2. retrun avg of all arguements as a float variable length arugements 
+        s = 0
+        for arg in args:
+          s += arg
+        return s/len(args)
+        
+        or
+        
+        def q1(*args):
+    count = 0
+    nums = 0
+    for i in args:
+        
+        nums  = nums + i
+        count += 1 
+        print(nums)
+    avg = nums / count 
+    return avg
+    pass
+    
+    ###q3. return a new list containing the last n entries in lst. LIST SLICING
+        def q1(lst,n):
+    newlist = []
+    newlist = lst[-n:]
+    return newlist
+        
+        
