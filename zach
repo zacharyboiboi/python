@@ -1,0 +1,213 @@
+objects can be converted from one type to another 
+  -bool() <-- returns false 
+  -int()
+  -float()
+  -str()
+use the type() function if doubt what type something is 
+use id() to see if something has chnage in the value 
+
+tuple and list can hold multiple items list is mutable
+ accessing a list <list>[index value]
+ modifying a list <list>[index] = <value>
+ appending to a list<list>.append(<value>) adds at the end of the list
+ deleting from a list del <list>[index]
+ 
+ 
+ math operations:
+  +  addition
+  -  subtraction
+  *  multiplication
+  /  divsion
+  // integer divsion
+  %  modulus
+  ** exponent
+  
+  a = 5
+>>> a = a + 3
+>>> b = 5
+>>> b += 3
+>>> print('a: {}  b: {}'.format(a, b))
+a: 8  b: 8
+
+  
+  order of operation applies to python pendas 
+  can use the abov mathematical operators in a wide variety
+  
+  
+  
+  
+  use print and format
+    print('a: {} b: {}'.format(a,b))
+    
+   str.split(sep=None, maxplit=-1)
+   'user:passwd'.split(':')
+['user', 'passwd']
+
+   
+   strings are immutable therfore trying to reassign to cause an error 
+   s = 'hello'
+>>> s[0]
+'h'
+>>> s[0] = 'j'
+Traceback (most recent call last):
+
+to overcome this one must turn the string into a list list(<str variable>)
+  half to assign variable to this new list <------ apples = list(bana)
+  then using index values can modify list 
+  use join to join them back together 
+ Examples
+
+
+>>> ''.join(l)
+'jello'
+>>> '.'.join(l)
+'j.e.l.l.o'
+>>> '::'.join(l)  # The separator can be multiple characters
+'j::e::l::l::o'
+  
+  
+  if dealing with an email for an example one can use replace and split it all.
+  <variable>.replace("<og item>", "<new item>')
+  
+  input() is how to get user input 
+  
+  
+  boolean operators:
+  
+  ==  equal to
+  !=  not equal to
+  <   less then
+  <=   less then or equal to
+  >   greater then
+  >=  greater than or equal
+  in  value in collection
+  is  object id match
+  and logical
+  or logical
+  not logical
+  
+  for i in range(10, -1, -1):
+  print(i)
+uses step to count from 10 to zero
+   
+   
+   ###slicing 
+   sequence[start:stop:step]
+   <sequence>[::-1] <-- reverses sequence 
+   <sequence>[:-1] copy all execpt last
+   
+   
+   read()
+Reads all file data
+
+
+read(size)
+Read up to size bytes from the file
+
+
+readline()
+Reads a line from a file including newline '\n'
+
+
+readlines()
+Reads all lines in a file including newline '\n' into a list
+
+
+readable()
+Returns True if the file is readable
+
+s = {1,2,3,4,5}
+t = {4,5,6,7,8}
+s.union(t)
+{1, 2, 3, 4, 5, 6, 7, 8}
+s.difference(t)
+{1, 2, 3}
+s.intersection(t)
+{4, 5}
+
+
+romanNumerals = {'I':1, 'V':5, 'X':10, 'L':50}
+romanNumerals['X']
+
+romanNumerals['C'] = 100
+romanNumerals['D'] = 500
+romanNumerals['M'] = 1000
+
+romanNumerals['C']
+
+del romanNumerals['C']
+'C' in romanNumerals
+'M' in romanNumerals
+
+romanNumerals = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+
+#Print all keys with values
+for key in romanNumerals:
+    print('{} = {}'.format(key, romanNumerals[key]))
+
+#Easier method
+for key, value in romanNumerals.items():
+    print('{} = {}'.format(key, value))
+
+def doSum(*args):
+    type(args)
+    sum = 0
+    for addend in args:
+        sum += addend
+    print("Sum is {}".format(sum))
+doSum(1,2,3,4)
+Sum is 10
+
+
+numlist = [13, 11, 1, 25, 78, 2, 6, 0]
+sorted(numlist)
+[0, 1, 2, 6, 11, 13, 25, 78]
+sorted(numlist, reverse=True)
+[78, 25, 13, 11, 6, 2, 1, 0]
+
+
+    
+    for i in nums:  <-----if p is present add it to list
+        apples = i.split()
+        
+        for item in apples:
+            if 'p' in item:
+                p_words.append(item)
+            else: 
+                pass
+    print(p_words)
+    
+    with open('travel_plans.txt') as fp: <---- assign the first 33 chr to variable
+    first_chars = fp.read(33)
+    
+    with open('school_prompt.txt')as fp:
+    three = []
+    nums = []
+    
+    nums = fp.readlines() <----- assign third word to variable
+    for i in nums:
+        apples = i.split()
+        three.append(apples[2])
+        
+        with open('emotion_words.txt') as fp: <--- total number of words
+    num_words = 0
+    nums = []
+    nums = fp.readlines()
+    for i in nums: 
+        nums = i.split()
+        num_words += len(nums)
+        
+        
+        with open('travel_plans.txt') as fp: <----- num of chr
+    num = 0
+    nums = fp.readlines()
+    for i in nums: 
+        for item in i:
+            num += 1 
+            
+            with open('school_prompt.txt') as fp: <-- num of line
+    num_lines = 0
+    nums = fp.readlines()
+    for i in nums:
+        num_lines += 1 
+    
