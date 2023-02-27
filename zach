@@ -255,5 +255,162 @@ sorted(numlist, reverse=True)
     newlist = []
     newlist = lst[-n:]
     return newlist
+    
+    #### q4. return list in ord() of each character of string in order found 
+    
+        def q1(strng):
+    newlist = []
+    
+    for i in strng:
+            newlist.append(ord(i))
+            
+               
+    return newlist
+    pass
+        
+        
+        return [ord (x)for x in strng]
+        
+        
+      #### q5. return tuple with each element in tuple containing a single word frm the input string in order
+        return tuple(strng.split())
+        
+        def q1(strng):
+    tuples = ()
+    list = []
+    new = strng.split()
+    for i in new:
+       list.append(i)
+       tuples = tuple(list)
+    return tuples 
+    
+    
+    #####q6: dictionaries and unpacking tuples product prices and quantity
+    
+    
+
+Given a dictionary (catalog) whose keys are product names and values are product prices per unit and a list of tuples (order) of product names and quantities, compute and return the total value of the order.
+
+Example catalog:
+
+{
+'AMD Ryzen 5 5600X': 289.99,
+'Intel Core i9-9900K': 363.50,
+'AMD Ryzen 9 5900X': 569.99
+}
+
+Example order:
+
+[
+('AMD Ryzen 5 5600X', 5), 
+('Intel Core i9-9900K', 3)
+]
+
+Example result:
+
+2540.45
+
+How the above result was computed:
+
+(289.99 * 5) + (363.50 * 3)
+
+def q6(catalog, order):
+    pass
+
+
+    def q6(catalog, order):
+    value = 0
+    for item in catalog.keys():
+        for i, num in order:
+            if item == i:
+                value += catalog[item] * num
+            elif item != i:
+                continue 
+            else:
+                break
+            
+         OR:
+         
+         total = []
+         for key in catalog:
+            for item in order:
+                if item[0] == key:
+                  total.append(catalog[key] * item[1]
+         return sum(total)
+                  
+    return value
+    
+    
+    total = 0
+    for product, quantiy in order:
+        total == catalog[product] * quantity
+     retrun total
+     
+     return sum(catalog[product]*quantity for product.quantity in order
+    
+    
+    ####q7: given filename open file return length of first line in file excluding the line terminator
+      ` with open(filename) as fp:
+          x = fp.readlines()
+          y = len(x) - 1
+          return y
+          
+          def q1(filename):
+ 
+    
+    with open('filename') as fp:
+        leng = 0
+        file = []  
+        file = fp.readlines()
+        file = file[0]
+        leng = len(file) - 1
+        
+        return leng
+
+    pass
+          
+          with open(filename) as fp:
+            return len(fp.readlines() - 1
+          
+      ####q8: given filename and list write each entry from to list to file on sepertae lines until stop is found in list
+      
+        with open(filename, 'w') as fp:
+          for item in lst:
+            if item.lower() == 'stop':
+                break
+            fp.write(f'{item}\n')
+            
+            
+            
+       ####q9. given militarytime return a string containing greeting of the day
+          def q1(miltime):
+    if miltime >= 300 and miltime <= 1159: <----- doesnt like leadinf zero and half to call variable twice return it not print it exactly as shown
+        return('Good Morning')
+    elif miltime >= 1200 and miltime <= 1559:
+        return('Good Afternoon')
+    elif miltime >= 1600 and miltime <= 2059:
+        return('Good Evening')
+    else:
+        return('Good Night')
+        
+        
+        if miltime >= 0b0301
+        
+        
+        
+        ### q10. return true if all negative are not negative if any are on the list return False
+        
+        def q1(numlist):
+    for i in numlist:
+        if i < 0:
+            return False 
+        if i > 0:
+            return True
+    pass
+    
+      for i in numlist:
+        if i < 0:
+          return False
+         return True 
         
         
