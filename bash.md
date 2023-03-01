@@ -35,6 +35,7 @@
    -/pattern search forward for (N-th) matching line
    -&pattern Seach backward for (N-th) matching line
    n or shift+n moves between search results 
+   b to go up
    q    Quit man
    
    ```
@@ -86,7 +87,7 @@
             
      **touch file{1..100}**
      **rm file*** <-- globbing**
-      
+      rm * removes everything in directory
       
       
     **4.shell function**
@@ -119,16 +120,16 @@
          ls;cat file STDIO one command STDERR other 
          can use this to get output of multiple command 
          
-  &   --Sends process to background (so we can run multiple process parallel)
-  ;   --Run multiple commands in one run, sequentially.
-  \  --To type larger command in multiple lines
-  &&  --Logical AND operator <-- run if first runs properly FIRST HAS TO WORK
-  ||  --Logical OR operator <--- cmd1 || cmd2 || cmd3 cmd2 will only run will cmd1 fails 
-  !   --NOT operator
-  |   -- PIPE operator
-  {}  --Command combination operator.
-    [ -f 99.txt ] || { echo " does not exist"; touch 99.txt; }
-  ()  --Precedence operator
+  &   --Sends process to background (so we can run multiple process parallel) \
+  ;   --Run multiple commands in one run, sequentially.\
+  \  --To type larger command in multiple lines\
+  &&  --Logical AND operator <-- run if first runs properly FIRST HAS TO WORK\
+  ||  --Logical OR operator <--- cmd1 || cmd2 || cmd3 cmd2 will only run will cmd1 fails \
+  !   --NOT operator\
+  |   -- PIPE operator\
+  {}  --Command combination operator.\
+    [ -f 99.txt ] || { echo " does not exist"; touch 99.txt; }\
+  ()  --Precedence operator\
 
 
 
@@ -163,11 +164,83 @@
             
             sysmbolic link    A shoprtcut or pointer
             hard link     Persistent, cannot cross file systems
+            
+            
+            .<file> hidden file
+            ls -a to look at hidden files
               
-      
+          ```
+        curl equilivant of cat 
+          
+          
+**curl cht.sh/grep** <--- bettre man page for grep can be used on any command SHOW EXAMPLES
+
+**explianshell.com** explains the command   
+
+
+
+ ###  Processes and Memory:
+    Process Hierarchy
+      kernel
+        Init - 01
+            BASH
+               ps 
+          process snapshot
+            - ps -elf 
+          terminating:
+              -kill    kill -9 1234
+              -killall  killall firefox 
+              
+              
+              
+  ### Cat More || Less
+        cat(1) - conatenate files and print on the standard outut" -n line numbers
+            head top 10 lines by default 
+            tail last 10 lines default
+            less parse easier 
+            more 
+               
         
+   ### Finding Files and Dirs:
+   
+      Find(1) - search for files in a directory hierarchy" does recrusion by default
+      -locate     looks for certain file */<file>*
+      -whereis    like which but man page
+      -which      file path
+      -find       
+      whatis      summary of what command does
+      what do we use find for?
+          Does it parse through the content or just files 
+          Is it limited to just fikenames or what can it search by?
+          
+          
+                find -iname ".conf" denotes case- insensitive file anything ending .conf
         
-        
-        
-        
+            find [LOCATION] [OPTIONS]
+                  find /etc -iname "*.conf" 2>/dev/null
+                  find /etc -iname "*.conf"  > /dev/null <-- displays errors to screen
+                  
+                 find -maxdepth <dirs deep> only a certain dic deep
+                 file -type   f     only displays files
+                 find -mtime 2    modified 2 days ago
+                 
+  **-mmim**               <-- find out difference of mmim and mtime 
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                 
+   #### exec option:
     
+                 
+                 find $HOME/1123/?.txt -type f -exec cp "{}" $HOME/CUT \;
+                
+                 -exec based on what it founf execute aginst eahc item in my output
+                 
+                 
+                 ls -l PATH/TO/DIRECTORY grep[OPTIONS]"pattern" {} ls {} grep pattern {}
+                 
+                 
