@@ -244,3 +244,74 @@
                  ls -l PATH/TO/DIRECTORY grep[OPTIONS]"pattern" {} ls {} grep pattern {}
                  
                  
+                 
+   # DAY 1 challenges:
+   
+  ## q1.Activity: Using Brace-Expansion, create the following directories within the $HOME directory:
+
+    1123
+    1134
+    1145
+    1156
+
+      mkdir $HOME/{1123,1134,1145,1156}
+  ## q2.Use Brace-Expansion to create the following files within the $HOME/1123 directory. You may need to create the $HOME/1123 directory. Make the following files, but utilze Brace Expansion to make all nine files with one touch command.
+
+Files to create:
+
+    1.txt
+    2.txt
+    3.txt
+    4.txt
+    5.txt
+    6~.txt
+    7~.txt
+    8~.txt
+    9~.txt
+
+  
+      touch $HOME/1123/{{1..5},{6~,7~,8~,9~}}.txt
+      
+      
+  ## q3.Using the find command, list all files in $HOME/1123 that end in .txt.
+  
+  
+  
+      find $HOME/1123 -type f -name "*.txt"  ## q4.
+      
+      
+  ## q4.List all files in $HOME/1123 that end in .txt. Omit the files containing a tilde (~) character.
+  
+  
+  
+      find $HOME/1123 -type f -name "*.txt" | grep -v "~"
+      
+      
+  ## q5.Copy all files in the $HOME/1123 directory, that end in ".txt", and omit files containing a tilde "~" character, to directory $HOME/CUT.
+  
+  
+      cp --copy-content $HOME/1123/{1..9}.txt $HOME/CUT
+      
+      
+  ## q6.Using ONLY the find command, find all empty files/directories in directory /var and print out ONLY the filename (not absolute path), and the inode number, separated by newlines.
+  
+  Example Output
+
+123 file1
+456 file2
+789 file3
+
+  
+  
+      find /var/ -empty -type f,d -printf '%i %f\n'
+      
+  ## q7.Using ONLY the find command, find all files on the system with inode 4026532575 and print only the filename to the screen, not the absolute path to the file, separating each filename with a newline. Ensure unneeded output is not visible.
+  
+      find . -type f printf '%f\n' -inum 4026532575 2>/dev/null
+      
+  ## q8. 
+                 
+  # DAY 2:
+  
+    ###
+                 
