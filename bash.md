@@ -173,7 +173,7 @@
         curl equilivant of cat 
           
           
-**curl cht.sh/grep** <--- bettre man page for grep can be used on any command SHOW EXAMPLES
+**curl cht.sh/grep** <--- better man page for grep can be used on any command SHOW EXAMPLES
 
 **explianshell.com** explains the command   
 
@@ -236,7 +236,7 @@
    #### exec option:
     
                  
-                 find $HOME/1123/?.txt -type f -exec cp "{}" $HOME/CUT \;
+                 
                 
                  -exec based on what it founf execute aginst eahc item in my output
                  
@@ -254,7 +254,13 @@
     1145
     1156
 
-      mkdir $HOME/{1123,1134,1145,1156}
+      **mkdir $HOME/{1123,1134,1145,1156}** <--- create 4 directories using brace expansion within home directory
+   or   mkdir $HOME/11{23,34,45,56}   
+         Brace expansion is a mechanism by which arbitrary strings may be generated, for commands that will take multiple arguements. For the below examples, the first example is equivalent to the second command. 
+         
+         brace expansion uses {}
+      
+      
   ## q2.Use Brace-Expansion to create the following files within the $HOME/1123 directory. You may need to create the $HOME/1123 directory. Make the following files, but utilze Brace Expansion to make all nine files with one touch command.
 
 Files to create:
@@ -271,13 +277,18 @@ Files to create:
 
   
       touch $HOME/1123/{{1..5},{6~,7~,8~,9~}}.txt
+                        or
+      touch $HOME/1123/{1..5}.txt $HOME/1123/{6..9}~.txt <------ can uses multiple arguements with spaces note the ~.txt as a good way to get it done.
+      
+      we leanred can use brace expnasion to crate files a nd directories 
       
       
   ## q3.Using the find command, list all files in $HOME/1123 that end in .txt.
   
   
   
-      find $HOME/1123 -type f -name "*.txt"  ## q4.
+      find $HOME/1123 -type f -name "*.txt"   <------ encrouages to uses double quotes to prevent uninteded results 
+      find /PATH/LOCATION/ [BOOLEAN] [OPTIONS]
       
       
   ## q4.List all files in $HOME/1123 that end in .txt. Omit the files containing a tilde (~) character.
@@ -290,16 +301,17 @@ Files to create:
   ## q5.Copy all files in the $HOME/1123 directory, that end in ".txt", and omit files containing a tilde "~" character, to directory $HOME/CUT.
   
   
-      cp --copy-content $HOME/1123/{1..9}.txt $HOME/CUT
+      cp --copy-content $HOME/1123/{1..9}.txt $HOME/CUT        **or**         find $HOME/1123/?.txt -type f -exec cp "{}" $HOME/CUT \;
+
       
       
   ## q6.Using ONLY the find command, find all empty files/directories in directory /var and print out ONLY the filename (not absolute path), and the inode number, separated by newlines.
   
   Example Output
 
-123 file1
-456 file2
-789 file3
+123 file1 \
+456 file2 \
+789 file3 \
 
   
   
@@ -310,7 +322,11 @@ Files to create:
       find . -type f printf '%f\n' -inum 4026532575 2>/dev/null
       
   ## q8. 
-                 
+    
+    
+    
+    
+    
   # DAY 2:
   
     ###
