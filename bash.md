@@ -603,18 +603,29 @@ Files to create:
         
  ##### q8.Find all dmesg kernel messages that contain CPU or BIOS (uppercase) in the string, but not usable or reserved (case-insensitive)Print only the msg itself, omitting the bracketed numerical expressions ie: [1.132775]
   
-  dmesg | egrep 'BIOS|CPU' | egrep -v 'usable|reserved' | cut -d']' -f2-
+  dmesg | egrep 'BIOS|CPU' | egrep -vi 'usable|reserved' | cut -d']' -f2-
+          -i means case insensitive
+          -v means get rid of lines what match 
+      
       
  ##### q9. Write a Bash script using "Command Substitution" to replace all passwords, using openssl, from the file $HOME/PASS/shadow.txt with the MD5 encrypted password: Password1234, with salt: bad4u Output of this command should go to the screen/standard output. You are not limited to a particular command, however you must use openssl. Type man openssl passwd for more information.
  
  OPEN=$(openssl passwd -1 -salt bad4u Password1234)
 
-awk -F: -v "vv=$OPEN" '{OFS=":"}{$2=vv; print$0}' $HOME/PASS/shadow.txt  <---- perfect example of variable substitution
+awk -F: -v "vv=$OPEN" '{OFS=":"}{$2=vv; print$0}' $HOME/PASS/shadow.txt  <---- perfect example of variable substitution REPLACES Passwords
+      second part of etc shadow 
+      sudo cat /etc/shadow 
 
+ command substitution 
+      openssl <file> <hash> <salt <password> <---- syntax
+      OFS retains colon seperator 
+      using set can use spaces replace with colon
+ 
  
  ##### q10.Using ONLY sed, write all lines from $HOME/passwd into $HOME/PASS/passwd.txt that do not end with either /bin/sh or /bin/false.
 
 sed '/\/bin\/false/d' '/\/bin\/sh/d' $HOME/passwd > $HOME/PASS/passwd.txt <--- can also use semi colons to pass multiple arguements 
+           /d deletes and sends to file half to backslash bin/fasle and /bin/sh 
 
 # Day 3:
 
