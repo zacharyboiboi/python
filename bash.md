@@ -621,6 +621,83 @@ Files to create:
      *    $-  = parameter repersents current flag repersented in shell bash bourne etc 
           $@  = This parameter holds all arugemts apssed to the script and reat them as an array It is similar to the $* parameter
           
+## Functions:
+      Functions:
+          -Allow breaking of code into more manageable blocks
+          -series of command executed as if a single command
+          -Can contain varaibles, loops, accept parameters, and return a value 
+          -declare functions first, thne call it 
+          -there are few different formats/styles for laying out a function
+          -DEMO: function.sh
+                 #!/bin/bash
+  ```
+  2 #function decalration thingy section
+  3 function focus() {
+  4  echo '"Your focus dtermines your reality." -Qui-Gon Jin'
+  5 
+  6 
+  7 
+  8 
+  9 }
+ 10 
+ 11 hello() {
+ 12     echo '"hello" -Obi Wan Kenobi'
+ 13 
+ 14 }
+ 15 #invoke that function yo
+ 16 #focus
+ 17 
+ 18 
+ 19 function odd() {
+ 20     echo '"Never tell me the odds." -Han Solo'
+ 21 
+ 22 
+ 23 }
+ 24 hello
+ 25 odd
+ 26 
+```
+## Variable Substituion:
+      -Ultimately, its just replacing a variable with its value.
+      
+ ```  1 #!/bin/bash
+  2 
+  3 sub1() {
+  4     #simple variable substituion
+  5     name="John"
+  6     echo $name
+  7 }
+  8 
+  9 sub2() {
+ 10     #variable subsitution within double quotes
+ 11     name="John"
+ 12     echo "My name isnt $name"
+ 13 }
+ 14 sub3() {
+ 15     #variable subsittution with single quotes
+ 16     name="zach"
+ 17     echo 'Your name is $name'
+ 18 }
+ 19 sub4() {
+ 20     #using curly braces t oseperate variable surroudning text
+ 21     name="john"
+ 22     echo "My name is $namenny5"
+ 23     echo "My name is ${name}nny5"
+ 24 }
+ 25 #invoke functions 
+ 26 #sub1
+ 27 #sub2
+ 28 #sub3
+ 29 #sub4
+ 30 
+ 31 sub5() {
+ 32     #use curly braces to substitute the value of a variable insdie parameter expansio    n
+ 33     name="John"
+ 34     echo ${name:0:2}
+ 35 }
+ 36 
+
+ ```
 
 
-## Special Parameters (Builtin Variables)
+
