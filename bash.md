@@ -610,13 +610,13 @@ Files to create:
       
  ##### q9. Write a Bash script using "Command Substitution" to replace all passwords, using openssl, from the file $HOME/PASS/shadow.txt with the MD5 encrypted password: Password1234, with salt: bad4u Output of this command should go to the screen/standard output. You are not limited to a particular command, however you must use openssl. Type man openssl passwd for more information.
  
-   OPEN=$(openssl passwd -1 -salt bad4u Password1234)
+    OPEN=$(openssl passwd -1 -salt bad4u Password1234)
 
-  awk -F: -v "vv=$OPEN" '{OFS=":"}{$2=vv; print$0}' $HOME/PASS/shadow.txt  <---- perfect example of variable substitution REPLACES Passwords
+     awk -F: -v "vv=$OPEN" '{OFS=":"}{$2=vv; print$0}' $HOME/PASS/shadow.txt  <---- perfect example of variable substitution REPLACES Passwords
       second part of etc shadow 
       sudo cat /etc/shadow 
 
- command substitution 
+    command substitution 
       openssl <file> <hash> <salt <password> <---- syntax
       OFS retains colon seperator 
       using set can use spaces replace with colon
@@ -624,8 +624,8 @@ Files to create:
  
 ##### q10.Using ONLY sed, write all lines from $HOME/passwd into $HOME/PASS/passwd.txt that do not end with either /bin/sh or /bin/false.
 
-sed '/\/bin\/false/d' '/\/bin\/sh/d' $HOME/passwd > $HOME/PASS/passwd.txt <--- can also use semi colons to pass multiple arguements 
-           /d deletes and sends to file half to backslash bin/fasle and /bin/sh 
+      sed '/\/bin\/false/d' '/\/bin\/sh/d' $HOME/passwd > $HOME/PASS/passwd.txt <--- can also use semi colons to pass multiple arguements 
+             /d deletes and sends to file half to backslash bin/fasle and /bin/sh 
 
 # Day 3:
 
@@ -700,7 +700,8 @@ sed '/\/bin\/false/d' '/\/bin\/sh/d' $HOME/passwd > $HOME/PASS/passwd.txt <--- c
 ## Variable Substituion:
       -Ultimately, its just replacing a variable with its value.
       
- ```  1 #!/bin/bash
+ ```  
+  1 #!/bin/bash
   2 
   3 sub1() {
   4     #simple variable substituion
@@ -737,17 +738,22 @@ sed '/\/bin\/false/d' '/\/bin\/sh/d' $HOME/passwd > $HOME/PASS/passwd.txt <--- c
  35 }
  36 
 
- ```
+```
 
 
+                                                                               
 ### Activities 11-15:
 
 
 ##### q11.  Using find, find all files under the $HOME directory with a .bin extension ONLY.Once the file(s) and their path(s) have been found, remove the file Ensure there is no trailing / at the end of the directory path when outputting to standard output.You may need to sort the output depending on the command(s) you use. Have each path displayed only once.
 
-      find $HOME -type f  -iname "*.bin" -printf '%h\n' 2>/dev/null | sort | uniq
-      man find | egrep "^\s+%" | egrep name <---- how to search for help 
-
+     --- find $HOME -type f  -iname "*.bin" -printf '%h\n' 2>/dev/null | sort | uniq <---- can also use sort -u to sort uniquely 
+      man find | egrep "^\s+%" | egrep name <---- how to search for help within man pages can use egrep 
+     --- find / -iname "*.bin" 2>/dev/null | tail | rev | cut -d/ -f22 | rev <--- dont know how rev works 
+     --- find $HOME -iname "*.bin" 2>/dev/ull | tail | awk 'BEGIN{FS="/";OPS="/"}{NF=NF-1;print $0}' <--- wtf so begin block define parameters for field seperator and how to return the field seperator (OPS) is seperate from the actual code block ither middle or end dont know how it gets rid of duplicates clever way to define last part -1 and print whole thing
+     --- find $HOME -iname "*.bin" 2>/dev/ull | tail | awk 'BEGIN{FS=OFS="/"}{NF--print}'
+      could do -F<seperator> 
+      
 ##### q12.
 
 ##### q13.
@@ -756,30 +762,31 @@ sed '/\/bin\/false/d' '/\/bin\/sh/d' $HOME/passwd > $HOME/PASS/passwd.txt <--- c
 
 ##### q15.
 
+#### postional parameter:
+  ```                                                
+  #!/bin/bash
+    2 #create a vraivble FILE assigning the value of arg1 (postional parameter 1)
+    3 FILE=$1
+    4 cat $FILE
 
-#!/bin/bash
-  2 #create a vraivble FILE assigning the value of arg1 (postional parameter 1)
-  3 FILE=$1
-  4 cat $FILE
-
-echo "rah marine corps" > file1
-  284  echo "rah Navy bois" > file2
-  285  cat file1
-  286  cat file1 file2
-  287  vim scripty.sh && chmod +x scripty.sh
-  288  ./scripty.sh  file1
-  289  ./scripty.sh  file2
+  echo "rah marine corps" > file1
+    284  echo "rah Navy bois" > file2
+    285  cat file1
+    286  cat file1 file2
+    287  vim scripty.sh && chmod +x scripty.sh
+    288  ./scripty.sh  file1
+    289  ./scripty.sh  file2
   
   
   
-  $0 	The name of the script
-$1 	The first argument to the script
-$2 	The second argument to the script
-$n 	The n-th argument to the script
-$# 	The number of arguments to the script
-$@ 	A list of all arguments to the script
-$* 	A list of all arguments to the script
-${#N} 	The length of the value of positional parameter N (Korn shell only)
-  
+    $0 	The name of the script
+  $1 	The first argument to the script
+  $2 	The second argument to the script
+  $n 	The n-th argument to the script
+  $# 	The number of arguments to the script
+  $@ 	A list of all arguments to the script
+  $* 	A list of all arguments to the script
+  ${#N} 	The length of the value of positional parameter N (Korn shell only)
+  ```
   
 
