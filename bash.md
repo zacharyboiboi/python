@@ -610,9 +610,9 @@ Files to create:
       
  ##### q9. Write a Bash script using "Command Substitution" to replace all passwords, using openssl, from the file $HOME/PASS/shadow.txt with the MD5 encrypted password: Password1234, with salt: bad4u Output of this command should go to the screen/standard output. You are not limited to a particular command, however you must use openssl. Type man openssl passwd for more information.
  
- OPEN=$(openssl passwd -1 -salt bad4u Password1234)
+   OPEN=$(openssl passwd -1 -salt bad4u Password1234)
 
-awk -F: -v "vv=$OPEN" '{OFS=":"}{$2=vv; print$0}' $HOME/PASS/shadow.txt  <---- perfect example of variable substitution REPLACES Passwords
+  awk -F: -v "vv=$OPEN" '{OFS=":"}{$2=vv; print$0}' $HOME/PASS/shadow.txt  <---- perfect example of variable substitution REPLACES Passwords
       second part of etc shadow 
       sudo cat /etc/shadow 
 
@@ -622,7 +622,7 @@ awk -F: -v "vv=$OPEN" '{OFS=":"}{$2=vv; print$0}' $HOME/PASS/shadow.txt  <---- p
       using set can use spaces replace with colon
  
  
- ##### q10.Using ONLY sed, write all lines from $HOME/passwd into $HOME/PASS/passwd.txt that do not end with either /bin/sh or /bin/false.
+##### q10.Using ONLY sed, write all lines from $HOME/passwd into $HOME/PASS/passwd.txt that do not end with either /bin/sh or /bin/false.
 
 sed '/\/bin\/false/d' '/\/bin\/sh/d' $HOME/passwd > $HOME/PASS/passwd.txt <--- can also use semi colons to pass multiple arguements 
            /d deletes and sends to file half to backslash bin/fasle and /bin/sh 
@@ -746,6 +746,7 @@ sed '/\/bin\/false/d' '/\/bin\/sh/d' $HOME/passwd > $HOME/PASS/passwd.txt <--- c
 ##### q11.  Using find, find all files under the $HOME directory with a .bin extension ONLY.Once the file(s) and their path(s) have been found, remove the file Ensure there is no trailing / at the end of the directory path when outputting to standard output.You may need to sort the output depending on the command(s) you use. Have each path displayed only once.
 
       find $HOME -type f  -iname "*.bin" -printf '%h\n' 2>/dev/null | sort | uniq
+      man find | egrep "^\s+%" | egrep name <---- how to search for help 
 
 ##### q12.
 
