@@ -754,14 +754,78 @@ Files to create:
      --- find $HOME -iname "*.bin" 2>/dev/ull | tail | awk 'BEGIN{FS=OFS="/"}{NF--print}'
       could do -F<seperator> 
       
-##### q12.
+##### q12.Write a script that will do the following.
+
+    Write a script which will copy the last entry/line in the passwd-like file specified by the $1 positional parameter
+    Modify the copied line to change:
+        User name to the value specified by $2 positional parameter
+        Used id and group id to the value specified by $3 positional parameter
+        Home directory to a directory matching the user name specified by $2 positional parameter under the /home directory (i.e. if the $2 was 'Chris', the new line would have /home/Chris as its home directory)
+        The default shell to `/bin/bash'
+     Append the modified line to the end of the file
+        
+        function $1 $2 $3   
+      File=$1
+      User=$2
+      id=$3
+      lastline=$(tail -n1 $File)
+      dir="/home/$user"
+      shelly='/bin/bash'
+      echo "$lastline" | awk -F: -v vv=User -v ii=$id -v dd=$dir -v ss=$shelly '{OFS=":"}{$1=vv;;$3=$4=ii,$6=dd;$NF=ss;print}'
+
+
+        tail -1 $1 | awk -F: -v vv=$2 -v ss=$3 '{OFS=":"}{$1=vv; $4=ss; $3=ss; $NF="/bin/bash"; $6="/home/"vv; print $0}' >> $1
+
 
 ##### q13.
+    Find all executable files under the following four directories:
+        /bin
+        /sbin
+        /usr/bin
+        /usr/sbin
+    Sort the filenames with absolute path, and get the md5sum of the 10th file from the top of the list.
+find /etc -maxdepth 1 -name passwd | md5sum
+9231fb35b4431d59eae53a8c0d673231  -
+[chris@localhost ~]$ md5sum /etc/passwd
+62f5fa5100adcee3305cf979b5734a3e  /etc/passwd
 
-##### q14.
+ 
+ -wants second method
+ 
+ PASS=$(find /bin /sbin /usr/bin /usr/sbin -type f -executable | sort | head | tail -1) 
+md5sum $PASS | awk '{print $1}'
+        head | tail -1 
+        awk 'NR==10{print}'
+        sed -n 10p
 
+##### q14.Using any BASH command complete the following:
+
+    Sort the /etc/passwd file numerically by the GID field.
+    For the 10th entry in the sorted passwd file, get an md5 hash of that entry’s home directory.
+    Output ONLY the MD5 hash of the directory's name to standard output.
+
+        sort -k4 -n -t":" /etc/passwd | head | tail -1 | awk -F: '{print $6}' | md5sum | awk '{print $1}'
+        sort it by the fourth column numerically based on colon serperators on file /etc/passwd  | get the 10th one 
+        print the 6th field home directory md5sum it and print only the md5sum 
+        can use 'NR==10{print}' to print the tenth line can use cut -d' ' -f1 to get the first field.
+        
 ##### q15.
 
+    Write a script which will find and hash the contents 3 levels deep from each of these directories: /bin /etc /var
+    Your script should:
+        Exclude file type named pipes. These can break your script.
+        Redirect STDOUT and STDERR to separate files.
+        Determine the count of files hashed in the file with hashes.
+        Determine the count of unsuccessfully hashed directories.
+        Have both counts output to the screen with an appropriate title for each count.
+
+        find /bin /etc /var -maxdepth 3 ! -type p -exec md5sum {} \; 2>bad.txt 1>good.txt <--- maxdepth 3 no name pipes > STDOUT.del 2> STDERR.del use tac exec to md5sum the resulst in the container everything finds md5sum an sends to approaiate files
+ 
+        good=$(wc -l good.txt | cut -d' ' -f1)
+        bad=$(egrep "directory" bad.txt | wc -l | cut -d' ' -f1)
+        echo "Successfully Hashed Files: $good"
+        echo "Unsuccessfully Hashed Directories: $bad"
+        
 #### postional parameter:
   ```                                                
   #!/bin/bash
@@ -789,4 +853,189 @@ Files to create:
   ${#N} 	The length of the value of positional parameter N (Korn shell only)
   ```
   
+## DAY 4:
+
+#### For Loops:
+```
+        the for loop iterates over a list of items and performs the gievn set of commands. The Bash for loop takes the following form: for itme in [LIST] do [COMMANDS] done.
+        /Pseudo-Code
+            for item in [LIST]
+            do
+            [COMMANDS]
+            done
+         The LIST can be a series of strings seperated by spaces a range of numbers. output of a command, an rray. and so on. All loops are great for automating repetive taks!
+      ex.   
+         #!/bin/bash
+            for i in {1..10}
+            do
+                echo $i
+            done
+```            
+#### Break & continue
+```
+        The break statement terminates the current loop and passes program control to the statement that follows the terminated statement. It is usually used to terminate the loop whne a certain condition is met.
+            if [[ <condition> ]]; then
+                break
+            fi
+        The continue statement exits the current iteration of a loop and passes program control to te next itertaion of the loop.
+            if [[ <condition> ]]; then
+                continue
+            fi
+            
+ ```           
+#### While and Untill loops:
+
+    -The while loop is used to perform a given set of commands an unknown number of times as long as the given condition evaluates to true.
+    
+    #!/bin/bash
+    counter=1
+    while [[ $counter -le 10 ]]
+    do
+        echo $counter
+        ((counter++))
+    done
+    echo "All done!"
+    
+    -The until loop is used to execute a given set of commands as long as the given condition evaluates to false.
+    
+    #!/bin/bash
+    counter=1
+    until [[ $counter -gt 10 ]]
+    do
+        echo $counter
+        ((counter++))
+   done
+   echo "all done!"
+   
+   
+   
+        
+
+#### demo time 
+ ```   
+    
+    listo() {
+           for NAME in Zach Devon JAck
+           do
+                echo $NAME
+           done
+           }
+           
+     listo
+
+#list02
+ 14 #basic range loop
+ 15 range () {
+ 16     for value in {1..5}
+ 17     do
+ 18         echo $value
+ 19     done
+ 20     echo "All done!"
+ 21 }
+ 22 
+ 23 #range
+ 24 
+ 25 #range loop that counts down
+ 26 
+ 27 rocket () {
+ 28     for value in {10..1}
+ 29     do
+ 30         echo $value
+ 31         sleep 1
+ 32    done
+ 33    echo "there you go cracker!"
+ 34 }
+ 35 #rocket
+ 36 
+ 37 #for loop w/counter
+ 38 countloop () {
+ 39     for ((x=0;x<=5;x++))
+ 40     do
+ 41         echo "\$x is equal ot $x"
+ 42     done
+ 43 }
+ 44 
+ 45 #countloop  
+ 46 
+ 47 countloop2() {
+ 48     start=1
+ 49     end=5
+ 50     for ((i=start;i<=end;i++))
+ 51     do
+ 52        echo $i
+ 53     done
+ 54 }
+ 55 #countloop2
+ 56 
+ 57 
+ 58 lightyear () {
+ 59     i=0
+ 60     for (( ; ; ))
+ 61      do
+ 62      echo "iteration: $i - to infinite and beyond!"
+ 63      ((i++))
+ 64      if [[ $i -gt 9000 ]];then
+ 65         echo "its over 9000!!!"
+ 66         break
+ 67         break
+ 68      fi
+  done
+ 70 }
+ 71 #lightyear
+ 72 
+ 73 
+ 74 thanksdad() {
+ 75     for i in {0..10}
+ 76     do
+ 77        if [[ $i -eq 9 ]];then
+ 78            continue
+ 79        fi
+ 80        echo $i
+ 81        ((i++))
+ 82    done
+ 83    echo "Son: dad Done"
+ 84    echo " dad"
+ 85    echo "shit"
+ 86 }
+ 87 #thanksdad
+ 88 
+ 89 beepbeep () {
+ 90     jeep_owner=1
+ 91     while [[ $jeep_owner -gt 0 ]]
+ 92     do
+ 93         echo " how many jeeps beep"
+ 94         read -p "guess"  guess
+ 95 
+ 96         if [[ $guess -eq 0 ]]; then
+ 97             echo "none,man"
+ 98             ((jeep_owners--))
+ 99         elif [[ $guess -lt 0 ]];then
+100             echo "invalid"
+101        else
+102            echo "sorry"
+103         fi
+104    done
+105    echo "i dont get why obama"
+106 
+107 }
+108 #beepbeep
+109 
+110 
+111 autobots () {
+112     counter=10
+113     until [[ $counter -eq 1 ]]
+114     do
+115         echo $counter
+116         ((counter--))
+117    done
+118    echo "'Till all  are one' - Gandi"
+119 }
+120 autobots
+                                                                                                                                       120,1         Bot
+```
+                       
+
+
+
+
 
