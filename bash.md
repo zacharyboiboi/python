@@ -793,7 +793,8 @@ find /etc -maxdepth 1 -name passwd | md5sum
  -wants second method
  
  PASS=$(find /bin /sbin /usr/bin /usr/sbin -type f -executable | sort | head | tail -1) 
-md5sum $PASS | awk '{print $1}'
+ md5sum $PASS | awk '{print $1}' 
+ 
         head | tail -1 
         awk 'NR==10{print}'
         sed -n 10p
